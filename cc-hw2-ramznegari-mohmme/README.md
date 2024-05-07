@@ -4,34 +4,34 @@
 
 1.
 $$
-p = 3 \\
+p = 17 \\
 q = 11 \\
 $$
 
 2.
 $$
 n = p \cdot q \\
-n = 3 \cdot 11 \\
-n = 33
+n = 17 \cdot 11 \\
+n = 187
 $$
 
 3.
 $$
 \lambda(n) = lcm(p-1, q-1) \\
-\lambda(33) = lcm(2, 10) \\
-\lambda(33) = 10
+\lambda(187) = lcm(16, 10) \\
+\lambda(187) = 80
 $$
 
 4.
 $$
-(\gcd (10, e) = 1) \And\And (1 \lt e \lt 10) \\
+(\gcd (80, e) = 1) \And\And (1 \lt e \lt 80) \\
 e = 3
 $$
 
 5.
 $$
 d = e^{-1} \mod \lambda(n) \\
-d = 3^{-1} \mod 10 \\
+d = 3^{-1} \mod 80 \\
 $$
 - Extended Euclidean Algorithm:
 $$
@@ -39,14 +39,14 @@ $$
 \hline
 q & a & b & r & t_1 & t_2 & t=t_1-t_2\cdot q \\
 \hline
-3 & 10 & 3 & 1 & 0 & 1 & -3 \\
-3 & 3 & 1 & 0 & 1 & -3 & 6 \\
+26 & 80 & 3 & 2 & 0 & 1 & -26 \\
+1 & 3 & 2 & 1 & 1 & -26 & 27 \\
 \hline
 \end{array}\right|
 $$
 
 $$
-r = 0 \rArr d = t_2 = -3 \mod 10 = 7
+r = 1 \rArr d = t = 27 \mod 80 = 27
 $$
 
 6.
@@ -56,8 +56,8 @@ $$
 </div>
 
 $$
-\textbf{privateKey} = \{d, n\} = \{7,10\} \\
-\textbf{publicKey} = \{e, n\} = \{3,10\}
+\textbf{privateKey} = \{d, n\} = \{27,187\} \\
+\textbf{publicKey} = \{e, n\} = \{3,187\}
 $$
 
 <div dir='rtl'>
@@ -79,27 +79,24 @@ Ciphertext: $c=?$
 
 $$
 c = m^e \mod n \\
-c = 13^{3} \mod 33 \\
-c = (13^1 \cdot 13^2) \mod 33 \\
-c = (13 \cdot 4) \mod 33 \\
-c = 52 \mod 33 \\
-c = 19
+c = 13^{3} \mod 187 \\
+c = 140
 $$
 
 ## Decryption (Receiver Side)
 
-Ciphertext: $c=19$ \
+Ciphertext: $c=140$ \
 Message: $m=?$
 
 $$
-m = c^d \mod 33 \\
-m = 19^7 \mod 33 \\
-m = (19^1 \cdot 19^2 \cdot 19^4) \mod 33 \\
-19^2 \mod 33 = -2 \\
-19^4 \mod 33 = -2 \cdot -2 = 4 \mod 33 \\
-m = (19 \cdot -8) \mod 33 \\
-m = -152 \mod 33 \\
-m = 13 
+m = c^d \mod 187 \\
+m = 140^7 \mod 187 \\
+m = (140^1 \cdot 140^2 \cdot 140^4) \mod 187 \\
+140 \mod 187 = -47 \\
+140^2 \mod 187 = -47 * -47 = 152 = -35  \\
+140^4 \mod 187 = -35 \cdot -35 = 103 = -84 \\
+m = (140 \cdot -35 \cdot -84) \mod 187 \\
+m = 13
 $$
 
 # Diffie-Helman
